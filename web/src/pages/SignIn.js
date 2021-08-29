@@ -8,36 +8,33 @@ import Button from "../components/Button";
 
 import UserContext from "../contexts/UserContext";
 
-import Logo from "../assets/images/logo-pokedex.png";
+import logo from "../assets/images/logo-pokedex.png";
 
-export default function SignUp() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const { setToken } = useContext(UserContext);
-
   const history = useHistory();
 
   function submit(event) {
     event.preventDefault();
 
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, {
+      .post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, {
         email,
         password,
-        confirmPassword,
       })
-      .then((response) => {
-        setToken(response.data.token);
-        history.push("/sign-in");
+      .then((res) => {
+        setToken(res.data);
+        history.push("/");
       });
   }
 
   return (
     <Page>
       <Container onSubmit={submit}>
-        <img src={Logo} alt="Pokémon brand" />
+        <img src={logo} alt="Logo" />
         <Input
           type="text"
           placeholder="E-mail"
@@ -50,15 +47,9 @@ export default function SignUp() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Input
-          type="password"
-          placeholder="Confirm your password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button>Sign Up</Button>
-        <Link to="/sign-in" style={{ padding: "6px" }}>
-          Already have an account? Log In
+        <Button>Sign In</Button>
+        <Link to="/sign-up" style={{ padding: "6px" }}>
+          Don't have an account? Sign Up
         </Link>
       </Container>
     </Page>
@@ -66,23 +57,20 @@ export default function SignUp() {
 }
 
 const Page = styled.div`
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
   padding: 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   background-color: #e44141;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.form`
-  width: 100%;
-  max-width: 400px;
-  flex-direction: column;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
 `;
