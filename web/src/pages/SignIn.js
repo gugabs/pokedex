@@ -57,20 +57,23 @@ export default function Login() {
 }
 
 const Page = styled.div`
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
   padding: 20px;
-  background-color: #e44141;
+
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
+  background-color: #e44141;
 `;
 
 const Container = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
   max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
